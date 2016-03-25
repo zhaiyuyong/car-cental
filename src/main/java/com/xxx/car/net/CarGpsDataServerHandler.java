@@ -14,9 +14,9 @@ import org.slf4j.LoggerFactory;
 import com.xxx.car.domain.CarHistoryRecord;
 import com.xxx.car.service.CarHistoryRecordService;
 
-public class EchoServerHandler extends ChannelInboundHandlerAdapter{
+public class CarGpsDataServerHandler extends ChannelInboundHandlerAdapter{
 	
-	private final static Logger LOGGER = LoggerFactory.getLogger(EchoServerHandler.class);
+	private final static Logger LOGGER = LoggerFactory.getLogger(CarGpsDataServerHandler.class);
 	
 	private CarHistoryRecordService carHistoryRecordService;
 
@@ -88,7 +88,7 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter{
         ctx.close();
     }
 
-	public EchoServerHandler(CarHistoryRecordService carHistoryRecordService) {
+	public CarGpsDataServerHandler(CarHistoryRecordService carHistoryRecordService) {
 		super();
 		this.carHistoryRecordService = carHistoryRecordService;
 	}

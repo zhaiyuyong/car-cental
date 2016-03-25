@@ -14,7 +14,6 @@ import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import io.netty.util.concurrent.DefaultEventExecutorGroup;
 import io.netty.util.concurrent.DefaultThreadFactory;
-import io.netty.util.concurrent.EventExecutor;
 import io.netty.util.concurrent.EventExecutorGroup;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.FutureListener;
@@ -29,7 +28,7 @@ import org.springframework.stereotype.Service;
 import com.xxx.car.service.CarHistoryRecordService;
 
 @Service
-public class EchoServer {
+public class CarGpsDataServer {
 
 	@Value("${car.server.port:11000}")
 	private int port = 11000;
@@ -39,7 +38,7 @@ public class EchoServer {
 	
 	final EventLoopGroup bossGroup = new NioEventLoopGroup();
 	final EventLoopGroup workerGroup = new NioEventLoopGroup();
-	EventExecutorGroup businessLogicEventExecutorGroup = new DefaultEventExecutorGroup(8,new DefaultThreadFactory("businessLogic"));
+	EventExecutorGroup businessLogicEventExecutorGroup = new DefaultEventExecutorGroup(4,new DefaultThreadFactory("businessLogic"));
 
 	@PostConstruct
 	public void run() throws Exception {
@@ -55,7 +54,7 @@ public class EchoServer {
             	 ch.pipeline().addLast(new DelimiterBasedFrameDecoder(1024, delimiter));
             	 ch.pipeline().addLast(new StringDecoder());
             	 ch.pipeline().addLast(new StringEncoder());
-                 ch.pipeline().addLast(businessLogicEventExecutorGroup,new EchoServerHandler(carHistoryRecordService));
+                 ch.pipeline().addLast(businessLogicEventExecutorGroup,new CarGpsDataServerHandler(carHistoryRecordService));
              }
          });
 
@@ -65,13 +64,13 @@ public class EchoServer {
               bossGroup.shutdownGracefully();
               workerGroup.shutdownGracefully();
             }
-          });
+        });
     }
 	
 	@PreDestroy
-	  public void destory() {
-	    bossGroup.shutdownGracefully();
-	    workerGroup.shutdownGracefully();
-	  }
+	public void destory() {
+	   bossGroup.shutdownGracefully();
+	   workerGroup.shutdownGracefully();
+	}
 
 }
