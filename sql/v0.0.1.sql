@@ -1,7 +1,10 @@
 CREATE TABLE `car_history_record` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `imei` varchar(50)  NULL COMMENT 'IMEI',
-  `sim_phone` varchar(15)  NULL COMMENT '电话号码',
+  `card_num` varchar(50) NULL COMMENT '卡号',
+  `gps_sw_ver` varchar(50)  NULL COMMENT 'GPS模块软件版本',
+  `gps_hw_ver` varchar(50)  NULL COMMENT 'GPS模块硬件版本',
+  `temperature` double(20,4)  NULL COMMENT '温度',
   `battery_voltage` double(20,6)  NULL COMMENT '电池电压',
   `gps_module_has_on_car` int(11)  NULL COMMENT '模块是否在车上',
   `gps_date` varchar(20)  NULL COMMENT 'gps时间',
@@ -13,8 +16,7 @@ CREATE TABLE `car_history_record` (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  key `imei_index`(`imei`),
-  key `sim_phone_index`(`sim_phone`)
+  key `imei_index`(`imei`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='原始记录表';
 
 CREATE TABLE `car_info` (

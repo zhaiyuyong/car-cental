@@ -85,6 +85,8 @@ dependencies {
     
      // The database driver for MySQL here
     compile 'mysql:mysql-connector-java:' + mysqlConnectorVersion
+    
+    compile 'org.codehaus.groovy:groovy:1.8.6'
 
 }
 

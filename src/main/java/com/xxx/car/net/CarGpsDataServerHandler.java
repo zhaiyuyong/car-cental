@@ -49,16 +49,25 @@ public class CarGpsDataServerHandler extends ChannelInboundHandlerAdapter{
 						carHistoryRecord.setRecordValue(record);
 						int length = datas.length;
 						if(length >= 4){
-							carHistoryRecord.setImei(datas[0]);
-							carHistoryRecord.setSimPhone(datas[1]);
-							carHistoryRecord.setBatteryVoltage(Float.valueOf(datas[2]));
-							carHistoryRecord.setGpsModuleHasOnCar(Integer.parseInt(datas[3]) == 1);
-							if(length == 9){
-								carHistoryRecord.setGpsDate(datas[4]);
-								carHistoryRecord.setGpsLatitude(Float.valueOf(datas[5]));
-								carHistoryRecord.setGpsLongitude(Float.valueOf(datas[6]));
-								carHistoryRecord.setGpsAltitude(Float.valueOf(datas[7]));
-								carHistoryRecord.setGpsSpeed(Float.valueOf(datas[8]));
+							if(length == 7){
+								carHistoryRecord.setImei(datas[0]);//IMEI
+								carHistoryRecord.setCardNum(datas[1]);//卡号
+								carHistoryRecord.setGpsSwVer(datas[2]);//软件版本
+								carHistoryRecord.setGpsHwVer(datas[3]);//硬件版本
+								carHistoryRecord.setTemperature(Float.valueOf(datas[4]));//温度
+								carHistoryRecord.setBatteryVoltage(Float.valueOf(datas[5]));//电池电压
+								carHistoryRecord.setGpsModuleHasOnCar(Integer.parseInt(datas[6]) == 1);//是否安装
+							}else {
+								carHistoryRecord.setImei(datas[0]);//IMEI
+								carHistoryRecord.setTemperature(Float.valueOf(datas[1]));//温度
+								carHistoryRecord.setBatteryVoltage(Float.valueOf(datas[2]));//电池电压
+								carHistoryRecord.setGpsModuleHasOnCar(Integer.parseInt(datas[3]) == 1);//是否安装
+								if(length == 8){
+									carHistoryRecord.setGpsLatitude(Float.valueOf(datas[4]));//gps纬度
+									carHistoryRecord.setGpsLongitude(Float.valueOf(datas[5]));//gps经度
+									carHistoryRecord.setGpsAltitude(Float.valueOf(datas[6]));//gps海拔
+									carHistoryRecord.setGpsSpeed(Float.valueOf(datas[7]));//gps速度
+								}
 							}
 						}
 						carHistoryRecordService.saveCarHistoryRecord(carHistoryRecord);

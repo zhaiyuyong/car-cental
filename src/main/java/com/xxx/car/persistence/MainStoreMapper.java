@@ -14,20 +14,20 @@ public interface MainStoreMapper {
 	 * @param mainStore
 	 * @return
 	 */
-	@Insert("")
+	//@Insert("")
 	public Integer saveMainStore(MainStore mainStore);
 	/**
 	 * 根据店铺id查找店铺
 	 * @param mainStoreId
 	 * @return
 	 */
-	@Select("select * from main_store where main_store_id=#{mainStoreId}")
+	//@Select("select * from main_store where main_store_id=#{mainStoreId}")
 	public MainStore findMainStoreByStoreId(@Param("mainStoreId")String mainStoreId);
 	/**
 	 * 根据店铺id修改店铺
 	 * @param mainStore
 	 * @return
 	 */
-	@Update("")
+	//@Update("")
 	public Integer updateMainStoreByStoreId(MainStore mainStore);
 }

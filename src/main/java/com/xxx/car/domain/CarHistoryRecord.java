@@ -8,7 +8,10 @@ public class CarHistoryRecord extends BaseModel{
 	private static final long serialVersionUID = 1L;
 	
 	private String imei;
-	private String simPhone;
+	private String cardNum;
+	private String gpsSwVer;
+	private String gpsHwVer;
+	private Float temperature;
 	private Float batteryVoltage;
 	private Boolean gpsModuleHasOnCar;
 	private String gpsDate;
@@ -23,11 +26,30 @@ public class CarHistoryRecord extends BaseModel{
 	public void setImei(String imei) {
 		this.imei = imei;
 	}
-	public String getSimPhone() {
-		return simPhone;
+	public String getCardNum() {
+		return cardNum;
 	}
-	public void setSimPhone(String simPhone) {
-		this.simPhone = simPhone;
+	public void setCardNum(String cardNum) {
+		this.cardNum = cardNum;
+	}
+	public String getGpsSwVer() {
+		return gpsSwVer;
+	}
+	public void setGpsSwVer(String gpsSwVer) {
+		this.gpsSwVer = gpsSwVer;
+	}
+	public String getGpsHwVer() {
+		return gpsHwVer;
+	}
+	public void setGpsHwVer(String gpsHwVer) {
+		this.gpsHwVer = gpsHwVer;
+	}
+	
+	public Float getTemperature() {
+		return temperature;
+	}
+	public void setTemperature(Float temperature) {
+		this.temperature = temperature;
 	}
 	public Float getBatteryVoltage() {
 		return batteryVoltage;
@@ -77,4 +99,5 @@ public class CarHistoryRecord extends BaseModel{
 	public void setRecordValue(String recordValue) {
 		this.recordValue = recordValue;
 	}
+	
 }

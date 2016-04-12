@@ -2,6 +2,8 @@ package com.xxx.car;
 
 import static org.springframework.core.Ordered.HIGHEST_PRECEDENCE;
 
+import java.io.InputStream;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
@@ -23,6 +25,11 @@ public class CarApplication {
 
 	@SuppressWarnings("unused")
 	public static void main(String[] args) throws Exception {
+		//./com/xxx/car/groovy/scripts/HelloWorldController.groovy
+		InputStream is = ClassLoader.getSystemResourceAsStream("scripts/HelloWorldController.groovy");
+		if(is == null){
+			System.out.println( "=======" );
+		}
 		SpringApplication.run(CarApplication.class,args);
 		FilterSecurityInterceptor fsi;
 		HandlerMethodArgumentResolver handlerMethodArgumentResolver;

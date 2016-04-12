@@ -7,12 +7,14 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.xxx.car.persistence.TestMapper;
 
 @RestController
 @RequestMapping("/api")
@@ -54,12 +56,14 @@ public class UserController {
 		map.put("age", "26");
 		return map;
 	}
-	
+	@Autowired
+	private TestMapper testMapper;
 	@RequestMapping("/user/you")
-	public Map<String, String> you(Principal principal){
-		Map<String, String> map = new HashMap<String, String>();
+	public Map<String, Object> you(Principal principal){
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("name", "zhaiyuyong");
 		map.put("age", "26");
+		map.put("db", testMapper.test("1,2"));
 		return map;
 	}
 }
